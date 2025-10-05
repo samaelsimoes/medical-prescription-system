@@ -163,3 +163,29 @@ Todas as funcionalidades descritas no desafio técnico foram implementadas e tes
 O sistema segue boas práticas de arquitetura em camadas e uso de tecnologias padrão do ecossistema Java EE.
 
 📍 Desenvolvido como parte de um teste técnico para desenvolvedor Java EE – demonstrando habilidades com back-end Java, front-end JSF, persistência com Hibernate, integração com PostgreSQL e implantação em WildFly.
+
+
+
+# Telas do teste
+<img width="1505" height="519" alt="image" src="https://github.com/user-attachments/assets/7d047deb-f7d9-4ca0-8ef1-1c5a7f119bc2" />
+<img width="1129" height="366" alt="image" src="https://github.com/user-attachments/assets/6a13d7d2-a5d6-4f97-9fe7-8e6795f3beca" />
+<img width="1110" height="298" alt="image" src="https://github.com/user-attachments/assets/ce80add6-cf59-423e-8d41-673f37a2bf83" />
+<img width="1161" height="686" alt="image" src="https://github.com/user-attachments/assets/fa241b52-2ff2-436b-9f11-86dab026c0c6" />
+<img width="1092" height="366" alt="image" src="https://github.com/user-attachments/assets/c3d330a3-a90b-4da8-a0f6-7c82e43294fe" />
+<img width="1243" height="684" alt="image" src="https://github.com/user-attachments/assets/a8917d76-c807-4a85-9980-65dc62010691" />
+<img width="1107" height="444" alt="image" src="https://github.com/user-attachments/assets/01372cc7-b822-4614-a73f-dc0a1048cab7" />
+<img width="1166" height="650" alt="image" src="https://github.com/user-attachments/assets/ed7de1b5-fe6b-464d-bbaa-3e0f78ae33d4" />
+<img width="1162" height="423" alt="image" src="https://github.com/user-attachments/assets/998e4aaa-a999-4061-83ae-e1ba87a3c625" />
+<img width="1076" height="664" alt="image" src="https://github.com/user-attachments/assets/5989c423-40d0-4ac2-ada6-b337ac9ba50c" />
+
+
+
+
+
+
+
+
+
+
+
+
