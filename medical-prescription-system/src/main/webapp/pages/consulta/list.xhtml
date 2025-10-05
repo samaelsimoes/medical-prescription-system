@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Consulta: Medicamentos por Paciente</title>
+    <style>
+        .page { max-width: 980px; margin: 24px auto; padding: 0 12px; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        .toolbar { display: grid; grid-template-columns: 1fr auto auto; gap: .5rem; align-items: center; }
+        .filters { display: grid; grid-template-columns: 1fr 1fr auto; gap: .5rem; }
+    </style>
+</h:head>
+<h:body>
+    <div class="page">
+        <h:form id="form">
+
+            <p:growl id="growl" showDetail="true" life="4000"/>
+            <p:messages id="msgs" showDetail="true" closable="true"/>
+
+            <h1>Consulta: Medicamentos por Paciente</h1>
+
+            <div class="toolbar">
+                <div class="filters">
+                    <p:autoComplete id="pac"
+                                    value="#{consultaBean.pacienteId}"
+                                    completeMethod="#{consultaBean.autoCompletePaciente}"
+                                    var="p" itemLabel="#{p.nome} - #{p.cpf}" itemValue="#{p.id}"
+                                    forceSelection="true" dropdown="true"
+                                    placeholder="ID Paciente"/>
+
+                    <p:autoComplete id="med"
+                                    value="#{consultaBean.medicamentoId}"
+                                    completeMethod="#{consultaBean.autoCompleteMedicamento}"
+                                    var="m" itemLabel="#{m.nome}" itemValue="#{m.id}"
+                                    forceSelection="true" dropdown="true"
+                                    placeholder="ID Medicamento"/>
+
+                    <p:commandButton value="Pesquisar" icon="pi pi-search"
+                                     process="@form" update=":form:tabela"/>
+                </div>
+
+                <p:commandButton value="Limpar" icon="pi pi-times"
+                                 actionListener="#{consultaBean.limparFiltros}"
+                                 update=":form:pac,:form:med,:form:tabela"/>
+                <p:button value="Voltar" icon="pi pi-arrow-left"
+                          href="#{request.contextPath}"/>
+            </div>
+
+            <p:dataTable id="tabela" value="#{consultaBean.model}" var="r"
+                         paginator="true" rows="10" lazy="true" styleClass="p-datatable-sm"
+                         emptyMessage="Sem resultados.">
+
+                <p:column headerText="ID Receita" style="width:120px; text-align:center">
+                    #{r[0]}
+                </p:column>
+
+                <p:column headerText="Paciente">
+                    #{r[1]}
+                </p:column>
+
+                <p:column headerText="Criada em" style="width:220px">
+                    <h:outputText value="#{r[2]}">
+                        <f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Qtde. Medicamentos" style="width:160px; text-align:center">
+                    #{r[3]}
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

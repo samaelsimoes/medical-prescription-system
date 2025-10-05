@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Clinic</title>
+    <style>
+        :root {
+            --page-max: 1080px;
+        }
+        body {
+            font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background: #f6f7fb;
+            margin: 0;
+        }
+        .shell {
+            max-width: var(--page-max);
+            margin: 24px auto 48px;
+            padding: 0 16px;
+        }
+        .brand {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 22px;
+        }
+        .brand .badge {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            display: grid; place-items: center; color: #fff;
+            box-shadow: 0 8px 24px rgba(16,185,129,.25);
+        }
+        .sub {
+            color: #5f6368; font-size: 13px; margin-left: 46px;
+        }
+        .grid {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .card {
+            grid-column: span 12;
+            background: #fff; border-radius: 14px;
+            padding: 18px; box-shadow: 0 6px 24px rgba(0,0,0,.06);
+            display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center;
+        }
+        .card .icon {
+            width: 56px; height: 56px; border-radius: 12px;
+            display: grid; place-items: center; font-size: 24px; color: #0ea5e9;
+            background: #e0f2fe;
+        }
+        .card h3 { margin: 0 0 4px; font-size: 18px; }
+        .card p { margin: 0; color: #6b7280; font-size: 13px; }
+        @media (min-width: 680px) {
+            .card { grid-column: span 6; }
+        }
+        @media (min-width: 980px) {
+            .card { grid-column: span 4; }
+        }
+        .footer {
+            margin-top: 28px; color: #6b7280; font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="shell">
+
+        <!-- Topbar -->
+        <p:toolbar style="border-radius:14px; box-shadow:0 4px 18px rgba(0,0,0,.05)">
+            <p:toolbarGroup>
+                <div class="brand">
+                    <span class="badge"><i class="pi pi-heart"></i></span>
+                    Clinic
+                </div>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <p:button value="Pacientes" icon="pi pi-users" outcome="/pages/paciente/list"
+                          styleClass="ui-button-secondary" />
+            </p:toolbarGroup>
+        </p:toolbar>
+        <div class="sub">Sistema de prescrições — acesse um módulo abaixo</div>
+
+        <!-- Cards -->
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon"><i class="pi pi-users"></i></div>
+                <div>
+                    <h3>Pacientes</h3>
+                    <p>Cadastre, edite e gerencie os pacientes.</p>
+                </div>
+                <p:button value="Abrir" icon="pi pi-arrow-right" outcome="/pages/paciente/list"/>
+            </div>
+
+            <div class="card">
+                <div class="icon" style="color:#f59e0b;background:#fef3c7"><i class="pi pi-briefcase"></i></div>
+                <div>
+                    <h3>Medicamentos</h3>
+                    <p>Catálogo de medicamentos disponíveis.</p>
+                </div>
+                <p:button value="Abrir" icon="pi pi-arrow-right" outcome="/pages/medicamento/list"/>
+            </div>
+
+            <div class="card">
+                <div class="icon" style="color:#22c55e;background:#dcfce7"><i class="pi pi-file-edit"></i></div>
+                <div>
+                    <h3>Receitar Medicamentos</h3>
+                    <p>Monte receitas para um paciente.</p>
+                </div>
+                <p:button value="Abrir" icon="pi pi-arrow-right" outcome="/pages/receita/list"/>
+
+            </div>
+
+            <div class="card">
+                <div class="icon" style="color:#a855f7;background:#f3e8ff"><i class="pi pi-search"></i></div>
+                <div>
+                    <h3>Consulta</h3>
+                    <p>Medicamentos por paciente (filtro por IDs).</p>
+                </div>
+                <p:button value="Abrir" icon="pi pi-arrow-right" outcome="/pages/consulta/list"/>
+            </div>
+
+            <div class="card">
+                <div class="icon" style="color:#ef4444;background:#fee2e2"><i class="pi pi-chart-bar"></i></div>
+                <div>
+                    <h3>Relatórios</h3>
+                    <p>Dashboards com os principais indicadores.</p>
+                </div>
+                <p:button value="Abrir" icon="pi pi-arrow-right" outcome="/pages/relatorios/dashboards"/>
+            </div>
+
+        </div>
+
+        <div class="footer">© Clinic — #{request.remoteAddr}</div>
+    </div>
+</h:body>
+</html>

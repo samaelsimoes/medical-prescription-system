@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+    <persistence-unit name="clinicPU" transaction-type="JTA">
+        <jta-data-source>java:/jdbc/PostgresDS</jta-data-source>
+
+        <class>com.company.clinic.domain.Paciente</class>
+        <class>com.company.clinic.domain.Medicamento</class>
+        <class>com.company.clinic.domain.Receita</class>
+        <class>com.company.clinic.domain.ReceitaItem</class>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

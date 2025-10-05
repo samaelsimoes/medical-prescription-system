@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Pacientes</title>
+    <style>
+        .page { max-width: 980px; margin: 24px auto; padding: 0 12px; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        .col1 { width:120px; text-align:right; padding-right:8px; vertical-align:middle }
+        .col2 { width:auto }
+    </style>
+</h:head>
+<h:body>
+    <div class="page">
+        <h:form id="form">
+
+            <p:growl id="growl" showDetail="true" life="4000"/>
+            <p:messages id="msgs" showDetail="true" closable="true"/>
+
+            <p:toolbar style="margin-bottom:1rem">
+                <p:toolbarGroup>
+                    <p:inputText id="filtro" value="#{pacienteBean.filtro}" placeholder="Nome ou CPF" style="width:260px"/>
+                    <p:commandButton value="Pesquisar" icon="pi pi-search"
+                                     process=":form:filtro"
+                                     update=":form:tabela,:form:msgs"
+                                     style="margin-left:.5rem"/>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="right">
+                    <p:commandButton value="Novo" icon="pi pi-plus"
+                                     actionListener="#{pacienteBean.novo}"
+                                     update=":form:dlg,:form:dlgContent"
+                                     oncomplete="PF('pacDlg').show()"/>
+                    <p:spacer width="8"/>
+                    <p:button value="Voltar" icon="pi pi-arrow-left" type="button"
+                              onclick="history.back();return false;" />
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:dataTable id="tabela"
+                         value="#{pacienteBean.model}" var="p"
+                         paginator="true" rows="10" lazy="true"
+                         rowsPerPageTemplate="10,20,50"
+                         emptyMessage="Nenhum paciente."
+                         styleClass="p-datatable-sm">
+
+                <p:column headerText="ID" style="width:90px; text-align:center">#{p.id}</p:column>
+                <p:column headerText="Nome">#{p.nome}</p:column>
+                <p:column headerText="CPF" style="width:220px">#{p.cpf}</p:column>
+
+                <p:column headerText="Ações" style="width:240px; text-align:center">
+                    <p:commandButton value="Editar" icon="pi pi-pencil"
+                                     actionListener="#{pacienteBean.editar(p)}"
+                                     process="@this"
+                                     update=":form:dlg,:form:dlgContent,:form:msgs"
+                                     oncomplete="PF('pacDlg').show()"/>
+                    <p:spacer width="6"/>
+                    <p:commandButton value="Excluir" icon="pi pi-trash" styleClass="ui-button-danger"
+                                     actionListener="#{pacienteBean.excluir(p)}"
+                                     process="@this"
+                                     update=":form:tabela,:form:growl,:form:msgs"
+                                     onclick="return confirm('Excluir este paciente?');"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog id="dlg" header="Paciente" widgetVar="pacDlg"
+                      modal="true" dynamic="true" resizable="false" width="520">
+                <h:panelGrid id="dlgContent" columns="2" columnClasses="col1,col2" styleClass="p-fluid" cellpadding="6">
+                    <h:outputText value="Nome: *"/>
+                    <p:inputText id="nome"
+                                 value="#{pacienteBean.selecionado.nome}"
+                                 required="true" requiredMessage="Informe o nome."/>
+
+                    <h:outputText value="CPF: *"/>
+                    <p:inputMask id="cpf" mask="999.999.999-99"
+                                 value="#{pacienteBean.selecionado.cpf}"
+                                 required="true" requiredMessage="Informe o CPF."/>
+
+                    <h:outputText/>
+                    <p:commandButton value="Salvar" icon="pi pi-check"
+                                     actionListener="#{pacienteBean.salvar}"
+                                     process=":form:dlgContent"
+                                     update=":form:tabela,:form:dlgContent,:form:msgs,:form:growl"
+                                     oncomplete="if(!args.validationFailed){PF('pacDlg').hide();}"/>
+                </h:panelGrid>
+            </p:dialog>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

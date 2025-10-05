@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Receitar Medicamentos</title>
+    <style>
+        .page { max-width: 980px; margin: 24px auto; padding: 0 12px; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        .row { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: center; }
+        @media (min-width: 768px) { .row { grid-template-columns: 160px 1fr; } }
+    </style>
+</h:head>
+<h:body>
+    <div class="page">
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true" life="3500"/>
+            <p:messages id="msgs" showDetail="true" closable="true"/>
+
+            <h1>Receitar Medicamentos</h1>
+
+            <div class="row">
+                <h:outputLabel for="pac" value="Paciente *"/>
+                <p:autoComplete id="pac"
+                                value="#{receitaBean.pacienteId}"
+                                completeMethod="#{receitaBean.autoCompletePaciente}"
+                                var="p"
+                                itemLabel="#{p.nome} - #{p.cpf}"
+                                itemValue="#{p.id}"
+                                forceSelection="true"
+                                dropdown="true"
+                                placeholder="Selecione o paciente"
+                                required="true"
+                                requiredMessage="Selecione um paciente."/>
+            </div>
+
+            <p:spacer height="8"/>
+
+            <p:panel header="Medicamentos" toggleable="true">
+                <p:pickList id="pl"
+                            value="#{receitaBean.medicamentosDualIds}"
+                            var="m"
+                            itemLabel="#{receitaBean.nomeMedicamento(m)}"
+                            itemValue="#{m}"
+                            converter="javax.faces.Long"
+                            showSourceControls="true"
+                            showTargetControls="true"
+                            sourceCaption="Disponíveis"
+                            targetCaption="Selecionados">
+                            <p:column>#{receitaBean.nomeMedicamento(m)}</p:column>
+                </p:pickList>
+        </p:panel>
+
+            <p:spacer height="12"/>
+
+            <p:commandButton value="Salvar Receita"
+                             icon="pi pi-check"
+                             action="#{receitaBean.salvar}"
+                             process="@form"
+                             update=":form:msgs,:form:growl"/>
+            <p:spacer width="8"/>
+            <p:button value="Voltar"
+                      icon="pi pi-arrow-left"
+                      href="#{request.contextPath}/pages/receita/list.xhtml"/>
+        </h:form>
+    </div>
+</h:body>
+</html>

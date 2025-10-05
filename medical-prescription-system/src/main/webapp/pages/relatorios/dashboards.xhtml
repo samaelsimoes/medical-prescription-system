@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Relatórios</title>
+    <style>
+        .page { max-width: 980px; margin: 24px auto; padding: 0 12px; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        h2 { margin-top: 24px; }
+    </style>
+</h:head>
+<h:body>
+    <div class="page">
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true" life="4000"/>
+            <p:messages id="msgs" showDetail="true" closable="true"/>
+
+            <h1>Relatórios</h1>
+
+            <h2>Top 2 Medicamentos Mais Prescritos</h2>
+            <p:dataTable value="#{relatorioBean.topMedicamentos}" var="row"
+                         styleClass="p-datatable-sm" emptyMessage="Sem dados">
+                <p:column headerText="Medicamento">#{row[0]}</p:column>
+                <p:column headerText="Total" style="width:120px; text-align:center">#{row[1]}</p:column>
+            </p:dataTable>
+
+            <h2>Top 2 Pacientes com Mais Medicamentos Prescritos</h2>
+            <p:dataTable value="#{relatorioBean.topPacientes}" var="row"
+                         styleClass="p-datatable-sm" emptyMessage="Sem dados">
+                <p:column headerText="Paciente">#{row[0]}</p:column>
+                <p:column headerText="Total" style="width:120px; text-align:center">#{row[1]}</p:column>
+            </p:dataTable>
+
+            <h2>Total de Medicamentos por Paciente</h2>
+            <p:dataTable value="#{relatorioBean.totaisPorPaciente}" var="row"
+                         paginator="true" rows="10" styleClass="p-datatable-sm"
+                         emptyMessage="Sem dados">
+                <p:column headerText="Paciente">#{row[0]}</p:column>
+                <p:column headerText="Total" style="width:120px; text-align:center">#{row[1]}</p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
+</h:body>
+</html>
